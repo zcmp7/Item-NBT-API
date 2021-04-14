@@ -1,9 +1,8 @@
 package de.tr7zw.changeme.nbtapi.utils;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.bukkit.Bukkit;
+
+import java.util.logging.Logger;
 
 /**
  * This class acts as the "Brain" of the NBTApi. It contains the main logger for
@@ -92,21 +91,6 @@ public enum MinecraftVersion {
 	}
 
 	private static void init() {
-		try {
-			if (hasGsonSupport() && !bStatsDisabled)
-				new ApiMetricsLite();
-		} catch (Exception ex) {
-			logger.log(Level.WARNING, "[NBTAPI] Error enabling Metrics!", ex);
-		}
-
-		if (hasGsonSupport() && !updateCheckDisabled)
-			new Thread(() -> {
-				try {
-					VersionChecker.checkForUpdates();
-				} catch (Exception ex) {
-					logger.log(Level.WARNING, "[NBTAPI] Error while checking for updates!", ex);
-				}
-			}).start();
 		// Maven's Relocate is clever and changes strings, too. So we have to use this
 		// little "trick" ... :D (from bStats)
 		final String defaultPackage = new String(new byte[] { 'd', 'e', '.', 't', 'r', '7', 'z', 'w', '.', 'c', 'h',
